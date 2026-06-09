@@ -294,3 +294,41 @@ Build database foundation using SQLAlchemy.
 * Industry standard project structure
 
 Status: 🚧 Pending
+
+
+# Day-3
+
+Day 3 Learning
+
+- Difference between Model and Schema
+- Database Normalization
+- One-to-Many Relationships
+- SQLAlchemy Engine
+- SQLAlchemy Session
+- Why Orders and Addresses belong in separate tables
+
+
+# Day-4
+
+Day 4
+
+Completed:
+- Created User SQLAlchemy Model
+- Created Users PostgreSQL Table
+- Implemented Pydantic Request/Response Schemas
+- Implemented Repository Pattern
+- Implemented Database Session Dependency
+- Added APIRouter for Users
+- Built POST /users endpoint
+- Inserted first user into PostgreSQL
+- Verified data directly from PostgreSQL
+
+Key Learnings:
+- Model vs Schema
+- Engine vs Session
+- Database Normalization
+- Repository Pattern
+- Docker Networking
+- Service Layer Architecture
+- Full Request Lifecycle:
+  Swagger → Route → Schema → Repository → Session → Engine → PostgreSQL

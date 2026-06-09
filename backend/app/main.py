@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-
+from app.db.init_db import init_db
+from app.api.user_routes import router as user_router
 from app.core.config import settings
 
 app = FastAPI(
@@ -7,11 +8,14 @@ app = FastAPI(
     version=settings.app_version
 )
 
+app.include_router(user_router)
+
 
 @app.get("/")
 def root():
     return {
-        "message": settings.app_name
+        "message": settings.app_name,
+        "database": settings.database_url
     }
 
 
@@ -21,3 +25,7 @@ def health_check():
         "status": "healthy",
         "environment": settings.environment
     }
+
+@app.on_event("startup")
+def startup():
+    init_db()
