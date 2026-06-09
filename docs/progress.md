@@ -332,3 +332,22 @@ Key Learnings:
 - Service Layer Architecture
 - Full Request Lifecycle:
   Swagger → Route → Schema → Repository → Session → Engine → PostgreSQL
+
+
+# 5 Day 5
+
+Completed:
+- Added Service Layer Architecture
+- Implemented Email Uniqueness Validation
+- Added Password Hashing with bcrypt
+- Created Security Module
+- Fixed bcrypt/passlib dependency issue
+- Successfully stored hashed passwords in PostgreSQL
+
+Key Learnings:
+- Business Logic belongs in Services
+- Repository Pattern
+- Password Hashing vs Encryption
+- bcrypt Salted Hashing
+- Dependency Version Conflicts
+- Debugging FastAPI using Docker Logs
