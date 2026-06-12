@@ -14,6 +14,10 @@ class Settings(BaseSettings):
         "redis://localhost:6379"
     )
 
+    secret_key: str = "my_super_secret_key_12345"
+    algorithm: str = "HS256"
+    access_token_expire_minutes: int = 30
+
     class Config:
         env_file = ".env"
 
