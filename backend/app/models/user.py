@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import Boolean
+from sqlalchemy import Boolean, Column
 from sqlalchemy import DateTime
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped
@@ -33,6 +33,11 @@ class User(Base):
     password_hash: Mapped[str] = mapped_column(
         String(255)
     )
+    
+    role = Column(
+    String,
+    default="customer"
+)
 
     is_active: Mapped[bool] = mapped_column(
         Boolean,
