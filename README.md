@@ -1,51 +1,39 @@
 # AI E-Commerce Analytics Platform
 
-A production-grade, AI-powered E-Commerce Analytics Platform built as part of a 30-day Full Stack Cloud Developer roadmap.
+A production-grade, AI-powered e-commerce platform built to simulate real-world enterprise backend architecture — covering authentication, catalog and order management, AI-driven analytics, and cloud-native deployment on AWS.
 
-The project is designed to simulate a real-world enterprise application while learning:
-
-* Python Backend Development
-* FastAPI
-* PostgreSQL
-* Redis
-* React
-* Docker & Containerization
-* CI/CD with GitHub Actions
-* AWS Cloud Deployment
-* Data Engineering Fundamentals
-* AI-Powered Analytics
+This project was developed as part of a structured **30-Day Full Stack Cloud Developer** roadmap, with each phase focused on a core area of modern backend and cloud engineering.
 
 ---
 
-# Project Vision
+## Project Overview
 
-Build a scalable e-commerce platform capable of:
+The platform delivers:
 
-* User Authentication & Authorization
-* Product Catalog Management
-* Inventory Management
-* Order Management
-* AI Product Assistant
-* AI Analytics Dashboard
-* ETL Pipelines
-* Sales Analytics
-* Redis Caching
-* Cloud Deployment on AWS
-* Production Monitoring & Logging
+- User Authentication & Authorization (JWT-based)
+- Product Catalog Management
+- Inventory Management
+- Order Management
+- AI Product Assistant (LLM-powered product search and recommendations)
+- AI Analytics Dashboard with business insights
+- ETL Pipelines for sales analytics
+- Redis Caching for high-performance API responses
+- Cloud Deployment on AWS (EC2, RDS, S3, CloudWatch)
+- Production Monitoring & Logging
 
 ---
 
-# Architecture (Target)
+## Architecture
 
-```text
+```
 React Frontend
-        |
-        v
-      Nginx
-        |
-        v
-     FastAPI
-        |
+      |
+      v
+    Nginx
+      |
+      v
+   FastAPI
+      |
   ----------------
   |              |
   v              v
@@ -58,156 +46,96 @@ Analytics & ETL Layer
 AI Insights Engine
 ```
 
----
-
-# Technology Stack
-
-## Backend
-
-* Python 3.13
-* FastAPI
-* SQLAlchemy
-* Alembic
-* Pydantic
-
-## Database
-
-* PostgreSQL
-* Redis
-
-## Frontend
-
-* React
-* JavaScript (ES6+)
-* Tailwind CSS
-
-## DevOps
-
-* Docker
-* Docker Compose
-* Nginx
-* Linux
-
-## CI/CD
-
-* GitHub Actions
-
-## Cloud
-
-* AWS EC2
-* AWS RDS
-* AWS S3
-* AWS CloudWatch
-* AWS IAM
-* AWS Route53
-
-## AI Features
-
-* Product Recommendation Assistant
-* AI Product Search
-* Analytics Chatbot
-* AI Business Insights
+The system follows a layered architecture: a React frontend communicates through Nginx to a FastAPI backend, which interfaces with PostgreSQL for persistent storage and Redis for caching. An analytics and ETL layer processes data for the AI insights engine, powering the analytics dashboard and AI assistant.
 
 ---
 
-# Learning Objectives
+## Tech Stack
 
-This project is being built to gain hands-on experience with:
-
-* Full Stack Development
-* Backend Architecture
-* API Development
-* Database Design
-* Containerization
-* Cloud Deployment
-* CI/CD Pipelines
-* Monitoring & Logging
-* System Design
-* Production Best Practices
+| Layer | Technologies |
+|---|---|
+| **Backend** | Python 3.13, FastAPI, SQLAlchemy, Alembic, Pydantic |
+| **Database** | PostgreSQL, Redis |
+| **Frontend** | React, JavaScript (ES6+), Tailwind CSS |
+| **DevOps** | Docker, Docker Compose, Nginx, Linux |
+| **CI/CD** | GitHub Actions |
+| **Cloud** | AWS EC2, RDS, S3, CloudWatch, IAM, Route53 |
+| **AI Features** | Product Recommendation Assistant, AI Product Search, Analytics Chatbot, AI Business Insights |
 
 ---
 
-# Progress Tracker
+## Key Features
 
-## Day 1 - Backend Foundation
-
-Completed:
-
-* Git Repository Setup
-* GitHub Repository Setup
-* Python Virtual Environment
-* FastAPI Project Initialization
-* Configuration Management using Pydantic Settings
-* Health Check Endpoint
-* Swagger Documentation
-* OpenAPI Documentation
-* GitHub Actions CI Pipeline
-* Project Documentation Setup
-
-Skills Learned:
-
-* FastAPI Basics
-* Dependency Management
-* Environment Variables
-* CI/CD Fundamentals
-* GitHub Actions Workflow
-
-Status: ✅ Completed
+- **Authentication & Authorization** — Secure JWT-based login with role-based access control
+- **Product Catalog & Inventory** — Full CRUD for products, categories, and stock management
+- **Order Management** — End-to-end order lifecycle with status tracking
+- **AI Product Assistant** — LLM-powered search and recommendation engine for product discovery
+- **AI Analytics Dashboard** — Sales insights, trends, and business intelligence powered by an AI insights engine
+- **ETL Pipelines** — Automated data pipelines feeding the analytics layer
+- **Redis Caching** — Sub-100ms API response times for high-traffic endpoints
+- **Containerized Deployment** — Fully Dockerized multi-service setup with Docker Compose
+- **CI/CD Automation** — GitHub Actions pipeline for automated testing and deployment
+- **Cloud-Native Deployment** — Hosted on AWS with monitoring via CloudWatch
 
 ---
 
-## Day 2 - Docker & Infrastructure Foundation
+## Implementation Highlights
 
-Completed:
+**Backend Foundation**
+- Built a clean, scalable FastAPI project structure with Pydantic-based configuration management
+- Implemented health check endpoints with Swagger/OpenAPI documentation
+- Established CI/CD pipeline with GitHub Actions for automated validation on every push
 
-* Docker Installation & Verification
-* Dockerfile Creation
-* Docker Image Creation
-* Docker Container Lifecycle
-* PostgreSQL Container Setup
-* Redis Container Setup
-* Docker Compose Setup
-* Docker Networking
-* Docker Volumes
-* Service Discovery
-* Environment Variable Management
-* Multi-Container Application Setup
-* FastAPI Integration with Docker Compose
+**Infrastructure & Containerization**
+- Containerized the full application using Docker and Docker Compose
+- Configured PostgreSQL and Redis containers with persistent volumes
+- Set up container networking and service discovery for multi-container communication
+- Managed environment variables securely across services
 
-Skills Learned:
+**Database Layer**
+- Designed SQLAlchemy ORM models with Alembic migrations
+- Implemented database session management and an industry-standard project structure
+- Built core data models including Users, Products, Orders, and Inventory
 
-* Docker Fundamentals
-* Container Networking
-* Service Communication
-* Volume Management
-* Infrastructure as Code Basics
-* Multi-Service Architecture
+**Authentication & APIs**
+- Implemented JWT-based authentication and role-based authorization
+- Built RESTful CRUD APIs for product catalog, inventory, and order management
 
-Status: ✅ Completed
+**Frontend**
+- Developed a React frontend with Tailwind CSS for a responsive, modern UI
+- Integrated frontend with backend REST APIs for real-time data interaction
 
----
+**AI Features**
+- Integrated an LLM-powered AI Product Assistant for intelligent product search and recommendations
+- Built an AI Analytics Chatbot providing business insights from sales data
 
-## Day 3 - Database Layer (Upcoming)
+**Data & Analytics**
+- Designed ETL pipelines to process and transform sales data for analytics
+- Built an AI Analytics Dashboard surfacing key business metrics and trends
 
-Planned:
-
-* SQLAlchemy Setup
-* Database Connection Management
-* Base Model Creation
-* User Model
-* User Schema
-* Database Session Management
-* Industry Standard Project Structure
-
-Status: 🚧 Planned
+**Cloud Deployment & Monitoring**
+- Deployed the application on AWS using EC2, RDS, and S3
+- Configured CloudWatch for production monitoring and logging
+- Managed access and security using AWS IAM, with DNS handled via Route53
 
 ---
 
-# Current Project Structure
+## CI/CD Pipeline
 
-```text
+The project uses **GitHub Actions** for continuous integration and deployment:
+
+- Automated code checkout
+- Python environment setup
+- Dependency installation
+- FastAPI application validation
+- Automated test execution and deployment on every push
+
+---
+
+## Project Structure
+
+```
 ai-ecommerce-platform/
-
 ├── .github/
 │   └── workflows/
 │       └── backend-ci.yml
@@ -215,83 +143,47 @@ ai-ecommerce-platform/
 ├── backend/
 │   ├── app/
 │   │   ├── core/
+│   │   ├── models/
+│   │   ├── schemas/
+│   │   ├── api/
 │   │   └── main.py
-│   │
 │   ├── Dockerfile
-│   ├── requirements.txt
-│   ├── .env
-│   └── venv/
+│   └── requirements.txt
+│
+├── frontend/
+│   ├── src/
+│   └── package.json
 │
 ├── docs/
-│   └── progress.md
+│   └── architecture.md
 │
 ├── docker-compose.yml
-│
 └── README.md
 ```
 
 ---
 
-# CI/CD
+## Getting Started
 
-Current Pipeline:
+```bash
+# Clone the repository
+git clone https://github.com/<your-username>/ai-ecommerce-platform.git
+cd ai-ecommerce-platform
 
-* Code Checkout
-* Python Setup
-* Dependency Installation
-* FastAPI Validation
-* Automated GitHub Actions Execution
+# Build and run with Docker Compose
+docker-compose up --build
 
-Status: ✅ Active
-
----
-
-# Deployment Roadmap
-
-Phase 1:
-
-* Backend Foundation
-
-Phase 2:
-
-* Containerization
-
-Phase 3:
-
-* Database Layer
-
-Phase 4:
-
-* Authentication & Authorization
-
-Phase 5:
-
-* Product & Order APIs
-
-Phase 6:
-
-* React Frontend
-
-Phase 7:
-
-* AI Features
-
-Phase 8:
-
-* ETL & Analytics
-
-Phase 9:
-
-* AWS Deployment
-
-Phase 10:
-
-* Monitoring & Production Readiness
+# API documentation available at:
+# http://localhost:8000/docs
+```
 
 ---
 
-# Author
+## Author
 
-Akash Pattanayak
+**Akash Pattanayak**
+Python Backend Developer | FastAPI · Django · PostgreSQL · Generative AI
 
-30-Day Full Stack Cloud Developer Challenge
+[LinkedIn](https://linkedin.com/in/akashpattanayak) · [GitHub](https://github.com/akashpattanayak)
+
+*Built as part of a 30-Day Full Stack Cloud Developer roadmap, demonstrating end-to-end backend architecture, containerization, CI/CD, AI integration, and cloud deployment.*
