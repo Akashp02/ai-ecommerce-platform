@@ -1,19 +1,17 @@
 from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import String
-from sqlalchemy import Float
 from sqlalchemy import Boolean
 from sqlalchemy import DateTime
-from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
 from app.db.base import Base
 
 
-class Product(Base):
+class Category(Base):
 
-    __tablename__ = "products"
+    __tablename__ = "categories"
 
     id = Column(
         Integer,
@@ -21,40 +19,21 @@ class Product(Base):
         index=True
     )
 
-    category_id = Column(
-        Integer,
-        ForeignKey("categories.id"),
-        nullable=False
-    )
-
-    sku = Column(
+    name = Column(
         String,
         unique=True,
         nullable=False
     )
 
-    name = Column(
+    slug = Column(
         String,
+        unique=True,
         nullable=False
     )
 
     description = Column(
-        String
-    )
-
-    price = Column(
-        Float,
-        nullable=False
-    )
-
-    stock_quantity = Column(
-        Integer,
-        default=0
-    )
-
-    is_available = Column(
-        Boolean,
-        default=True
+        String,
+        nullable=True
     )
 
     is_active = Column(
@@ -67,7 +46,7 @@ class Product(Base):
         default=datetime.utcnow
     )
 
-    category = relationship(
-        "Category",
-        back_populates="products"
+    products = relationship(
+        "Product",
+        back_populates="category"
     )

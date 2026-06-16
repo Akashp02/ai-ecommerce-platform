@@ -4,14 +4,21 @@ from app.api.user_routes import router as user_router
 from app.api.auth_routes import router as auth_router
 from app.core.config import settings
 from app.api.product_routes import router as product_router
+from app.api.category_routes import router as category_router
+from app.api.address_routes import router as address_router
+from app.api.order_routes import router as order_router
 
 app = FastAPI(
     title=settings.app_name,
     version=settings.app_version
 )
-app.include_router(product_router)
+
 app.include_router(user_router)
 app.include_router(auth_router)
+app.include_router(category_router)
+app.include_router(product_router)
+app.include_router(address_router)
+app.include_router(order_router)
 
 @app.get("/")
 def root():

@@ -2,24 +2,54 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from app.schemas.product import ProductCreate
+from app.schemas.product import ProductUpdate
 
 from app.repositories.product_repository import create_product
 from app.repositories.product_repository import get_all_products
 from app.repositories.product_repository import get_product_by_id
 from app.repositories.product_repository import get_product_by_sku
-from app.schemas.product import ProductUpdate
 from app.repositories.product_repository import update_product
+
+from app.repositories.category_repository import get_category_by_id
+
+
+def calculate_availability(
+    stock_quantity: int,
+):
+
+    return stock_quantity > 0
+
 
 def add_product(
     db: Session,
     product: ProductCreate,
 ):
 
-    # Check duplicate SKU (Business Validation)
+    # Step 1: Normalize input
+
+    normalized_sku = product.sku.strip().upper()
+    normalized_name = product.name.strip().title()
+
+
+    # Step 2: Validate category exists
+
+    category = get_category_by_id(
+        db=db,
+        category_id=product.category_id,
+    )
+
+    if not category:
+        raise HTTPException(
+            status_code=404,
+            detail="Category not found"
+        )
+
+
+    # Step 3: Check duplicate SKU
 
     existing_product = get_product_by_sku(
         db=db,
-        sku=product.sku,
+        sku=normalized_sku,
     )
 
     if existing_product:
@@ -28,16 +58,23 @@ def add_product(
             detail="SKU already exists"
         )
 
-    # Business Logic for availability
 
-    is_available = True
+    # Step 4: Determine availability
 
-    if product.stock_quantity == 0:
-        is_available = False
+    is_available = calculate_availability(
+        product.stock_quantity
+    )
+
+
+    # Step 5: Create product
 
     return create_product(
         db=db,
-        product=product,
+        category_id=product.category_id,
+        sku=normalized_sku,
+        name=normalized_name,
+        price=product.price,
+        stock_quantity=product.stock_quantity,
         is_available=is_available,
     )
 
@@ -69,6 +106,7 @@ def fetch_product(
 
     return product
 
+
 def update_existing_product(
     db: Session,
     product_id: int,
@@ -89,41 +127,32 @@ def update_existing_product(
         )
 
 
-    # Step 2: Check duplicate SKU
+    # Step 2: Update allowed fields
+    # SKU should NEVER change
 
-    existing_product = get_product_by_sku(
-        db=db,
-        sku=product_data.sku,
+    db_product.name = (
+        product_data.name
+        .strip()
+        .title()
     )
 
-    if (
-        existing_product
-        and existing_product.id != product_id
-    ):
-        raise HTTPException(
-            status_code=400,
-            detail="SKU already exists"
-        )
-
-
-    # Step 3: Update fields
-
-    db_product.sku = product_data.sku
-    db_product.name = product_data.name
-    db_product.description = product_data.description
     db_product.price = product_data.price
-    db_product.stock_quantity = product_data.stock_quantity
+
+    db_product.stock_quantity = (
+        product_data.stock_quantity
+    )
 
 
-    # Step 4: Recalculate availability
+    # Step 3: Recalculate availability
 
-    if product_data.stock_quantity == 0:
-        db_product.is_available = False
-    else:
-        db_product.is_available = True
+    db_product.is_available = (
+        calculate_availability(
+            product_data.stock_quantity
+        )
+    )
 
 
-    # Step 5: Save changes
+    # Step 4: Save changes
 
     return update_product(
         db=db,

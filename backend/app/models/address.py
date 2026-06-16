@@ -1,7 +1,6 @@
 from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import String
-from sqlalchemy import Float
 from sqlalchemy import Boolean
 from sqlalchemy import DateTime
 from sqlalchemy import ForeignKey
@@ -11,9 +10,9 @@ from datetime import datetime
 from app.db.base import Base
 
 
-class Product(Base):
+class Address(Base):
 
-    __tablename__ = "products"
+    __tablename__ = "addresses"
 
     id = Column(
         Integer,
@@ -21,53 +20,58 @@ class Product(Base):
         index=True
     )
 
-    category_id = Column(
+    user_id = Column(
         Integer,
-        ForeignKey("categories.id"),
+        ForeignKey("users.id"),
         nullable=False
     )
 
-    sku = Column(
-        String,
-        unique=True,
-        nullable=False
-    )
-
-    name = Column(
+    full_name = Column(
         String,
         nullable=False
     )
 
-    description = Column(
-        String
-    )
-
-    price = Column(
-        Float,
+    phone_number = Column(
+        String,
         nullable=False
     )
 
-    stock_quantity = Column(
-        Integer,
-        default=0
+    address_line1 = Column(
+        String,
+        nullable=False
     )
 
-    is_available = Column(
-        Boolean,
-        default=True
+    address_line2 = Column(
+        String,
+        nullable=True
     )
 
-    is_active = Column(
+    city = Column(
+        String,
+        nullable=False
+    )
+
+    state = Column(
+        String,
+        nullable=False
+    )
+
+    country = Column(
+        String,
+        nullable=False
+    )
+
+    postal_code = Column(
+        String,
+        nullable=False
+    )
+
+    is_default = Column(
         Boolean,
-        default=True
+        default=False
     )
 
     created_at = Column(
         DateTime,
         default=datetime.utcnow
-    )
-
-    category = relationship(
-        "Category",
-        back_populates="products"
     )

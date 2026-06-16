@@ -3,9 +3,9 @@ from pydantic import BaseModel, Field
 
 class ProductCreate(BaseModel):
 
+    category_id: int
     sku: str
     name: str
-    description: str
     price: float = Field(
         gt=0
     )
@@ -15,15 +15,14 @@ class ProductCreate(BaseModel):
 
 class ProductUpdate(BaseModel):
 
-    sku: str
     name: str
-    description: str
     price: float = Field(gt=0)
     stock_quantity: int = Field(ge=0)
 
 class ProductResponse(BaseModel):
 
     id: int
+    category_id: int
     sku: str
     name: str
     description: str

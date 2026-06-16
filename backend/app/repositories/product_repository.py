@@ -1,21 +1,25 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 
 from app.models.product import Product
-from app.schemas.product import ProductCreate
-
+from app.models.category import Category
 
 def create_product(
     db: Session,
-    product: ProductCreate,
+    category_id: int,
+    sku: str,
+    name: str,
+    price: float,
+    stock_quantity: int,
     is_available: bool,
 ):
 
     db_product = Product(
-        sku=product.sku,
-        name=product.name,
-        description=product.description,
-        price=product.price,
-        stock_quantity=product.stock_quantity,
+        category_id=category_id,
+        sku=sku,
+        name=name,
+        price=price,
+        stock_quantity=stock_quantity,
         is_available=is_available,
     )
 
@@ -28,13 +32,17 @@ def create_product(
     return db_product
 
 
-def get_all_products(
+def get_product_by_sku(
     db: Session,
+    sku: str,
 ):
 
     return (
         db.query(Product)
-        .all()
+        .filter(
+            func.lower(Product.sku) == sku.lower()
+        )
+        .first()
     )
 
 
@@ -46,24 +54,25 @@ def get_product_by_id(
     return (
         db.query(Product)
         .filter(
-            Product.id == product_id
+            Product.id == product_id,
+            Product.is_active == True
         )
         .first()
     )
 
 
-def get_product_by_sku(
+def get_all_products(
     db: Session,
-    sku: str,
 ):
 
     return (
         db.query(Product)
         .filter(
-            Product.sku == sku
+            Product.is_active == True
         )
-        .first()
+        .all()
     )
+
 
 def update_product(
     db: Session,
@@ -75,3 +84,17 @@ def update_product(
     db.refresh(db_product)
 
     return db_product
+
+def get_category_by_id(
+    db: Session,
+    category_id: int,
+):
+
+    return (
+        db.query(Category)
+        .filter(
+            Category.id == category_id,
+            Category.is_active == True
+        )
+        .first()
+    )
