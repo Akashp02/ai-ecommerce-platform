@@ -98,3 +98,15 @@ def get_category_by_id(
         )
         .first()
     )
+
+def deactivate_product(
+    db: Session,
+    db_product
+):
+
+    db_product.is_active = False
+
+    db.commit()
+    db.refresh(db_product)
+
+    return db_product

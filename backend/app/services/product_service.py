@@ -9,9 +9,9 @@ from app.repositories.product_repository import get_all_products
 from app.repositories.product_repository import get_product_by_id
 from app.repositories.product_repository import get_product_by_sku
 from app.repositories.product_repository import update_product
-
+from app.repositories.product_repository import deactivate_product
 from app.repositories.category_repository import get_category_by_id
-
+from app.core.logger import logger
 
 def calculate_availability(
     stock_quantity: int,
@@ -30,6 +30,10 @@ def add_product(
     normalized_sku = product.sku.strip().upper()
     normalized_name = product.name.strip().title()
 
+    logger.info(
+        f"Product creation request started | SKU={normalized_sku}"
+    )
+
 
     # Step 2: Validate category exists
 
@@ -39,6 +43,11 @@ def add_product(
     )
 
     if not category:
+
+        logger.error(
+            f"Invalid category | Category ID={product.category_id}"
+        )
+
         raise HTTPException(
             status_code=404,
             detail="Category not found"
@@ -53,6 +62,11 @@ def add_product(
     )
 
     if existing_product:
+
+        logger.error(
+            f"Duplicate SKU attempt | SKU={normalized_sku}"
+        )
+
         raise HTTPException(
             status_code=400,
             detail="SKU already exists"
@@ -68,7 +82,7 @@ def add_product(
 
     # Step 5: Create product
 
-    return create_product(
+    db_product = create_product(
         db=db,
         category_id=product.category_id,
         sku=normalized_sku,
@@ -78,6 +92,14 @@ def add_product(
         is_available=is_available,
     )
 
+
+    # Step 6: Success log
+
+    logger.info(
+        f"Product created successfully | SKU={normalized_sku} | Product ID={db_product.id}"
+    )
+
+    return db_product
 
 def list_products(
     db: Session,
@@ -157,4 +179,25 @@ def update_existing_product(
     return update_product(
         db=db,
         db_product=db_product,
+    )
+
+def remove_product(
+    db: Session,
+    product_id: int,
+):
+
+    db_product = get_product_by_id(
+        db=db,
+        product_id=product_id
+    )
+
+    if not db_product:
+        raise HTTPException(
+            status_code=404,
+            detail="Product not found"
+        )
+
+    return deactivate_product(
+        db=db,
+        db_product=db_product
     )

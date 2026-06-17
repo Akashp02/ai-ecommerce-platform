@@ -49,3 +49,28 @@ def get_order_by_id(
         )
         .first()
     )
+
+
+def get_order_items(
+    db: Session,
+    order_id: int
+):
+
+    return (
+        db.query(OrderItem)
+        .filter(
+            OrderItem.order_id == order_id
+        )
+        .all()
+    )
+
+
+def update_order(
+    db: Session,
+    db_order: Order
+):
+
+    db.commit()
+    db.refresh(db_order)
+
+    return db_order

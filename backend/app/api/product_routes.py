@@ -13,6 +13,7 @@ from app.services.product_service import fetch_product
 from app.api.deps import get_current_admin
 from app.schemas.product import ProductUpdate
 from app.services.product_service import update_existing_product
+from app.services.product_service import remove_product
 
 router = APIRouter(
     prefix="/products",
@@ -81,4 +82,18 @@ def update_existing_product_route(
         db=db,
         product_id=product_id,
         product_data=product,
+    )
+
+@router.delete(
+    "/{product_id}"
+)
+def delete_product(
+    product_id: int,
+    db: Session = Depends(get_db),
+    current_admin = Depends(get_current_admin)
+):
+
+    return remove_product(
+        db=db,
+        product_id=product_id
     )
