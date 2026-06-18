@@ -1,0 +1,56 @@
+2026-06-18 12:41:17,684 - INFO - HTTP Request: POST http://testserver/auth/register "HTTP/1.1 404 Not Found"
+2026-06-18 12:41:17,877 - INFO - HTTP Request: POST http://testserver/auth/register "HTTP/1.1 404 Not Found"
+2026-06-18 12:41:17,879 - INFO - HTTP Request: POST http://testserver/auth/register "HTTP/1.1 404 Not Found"
+2026-06-18 12:41:17,898 - INFO - HTTP Request: POST http://testserver/auth/login "HTTP/1.1 422 Unprocessable Entity"
+2026-06-18 12:51:36,035 - INFO - User registration attempt | Email=testuser@gmail.com
+2026-06-18 12:51:36,051 - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "D:\Project\ai-ecommerce-platform\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2026-06-18 12:51:36,273 - INFO - User registered successfully | User ID=1 | Email=testuser@gmail.com
+2026-06-18 12:51:36,276 - INFO - HTTP Request: POST http://testserver/users "HTTP/1.1 200 OK"
+2026-06-18 12:51:36,296 - INFO - User registration attempt | Email=duplicate@gmail.com
+2026-06-18 12:51:36,495 - INFO - User registered successfully | User ID=2 | Email=duplicate@gmail.com
+2026-06-18 12:51:36,497 - INFO - HTTP Request: POST http://testserver/users "HTTP/1.1 200 OK"
+2026-06-18 12:51:36,501 - INFO - User registration attempt | Email=duplicate@gmail.com
+2026-06-18 12:51:36,503 - ERROR - Duplicate email registration attempt | Email=duplicate@gmail.com
+2026-06-18 12:51:36,505 - INFO - HTTP Request: POST http://testserver/users "HTTP/1.1 400 Bad Request"
+2026-06-18 12:51:36,521 - INFO - User registration attempt | Email=loginuser@gmail.com
+2026-06-18 12:51:36,730 - INFO - User registered successfully | User ID=3 | Email=loginuser@gmail.com
+2026-06-18 12:51:36,732 - INFO - HTTP Request: POST http://testserver/users "HTTP/1.1 200 OK"
+2026-06-18 12:51:36,741 - INFO - Login attempt | Email=loginuser@gmail.com
+2026-06-18 12:51:36,953 - INFO - Login successful | User ID=3 | Email=loginuser@gmail.com
+2026-06-18 12:51:36,966 - INFO - HTTP Request: POST http://testserver/auth/login "HTTP/1.1 200 OK"
+2026-06-18 12:53:56,410 - INFO - User registration attempt | Email=testuser@gmail.com
+2026-06-18 12:53:56,425 - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "D:\Project\ai-ecommerce-platform\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2026-06-18 12:53:56,653 - INFO - User registered successfully | User ID=4 | Email=testuser@gmail.com
+2026-06-18 12:53:56,656 - INFO - HTTP Request: POST http://testserver/users "HTTP/1.1 200 OK"
+2026-06-18 12:53:56,674 - INFO - User registration attempt | Email=duplicate@gmail.com
+2026-06-18 12:53:56,879 - INFO - User registered successfully | User ID=5 | Email=duplicate@gmail.com
+2026-06-18 12:53:56,882 - INFO - HTTP Request: POST http://testserver/users "HTTP/1.1 200 OK"
+2026-06-18 12:53:56,884 - INFO - User registration attempt | Email=duplicate@gmail.com
+2026-06-18 12:53:56,887 - ERROR - Duplicate email registration attempt | Email=duplicate@gmail.com
+2026-06-18 12:53:56,889 - INFO - HTTP Request: POST http://testserver/users "HTTP/1.1 400 Bad Request"
+2026-06-18 12:53:56,903 - INFO - User registration attempt | Email=loginuser@gmail.com
+2026-06-18 12:53:57,125 - INFO - User registered successfully | User ID=6 | Email=loginuser@gmail.com
+2026-06-18 12:53:57,128 - INFO - HTTP Request: POST http://testserver/users "HTTP/1.1 200 OK"
+2026-06-18 12:53:57,134 - INFO - Login attempt | Email=loginuser@gmail.com
+2026-06-18 12:53:57,337 - INFO - Login successful | User ID=6 | Email=loginuser@gmail.com
+2026-06-18 12:53:57,344 - INFO - HTTP Request: POST http://testserver/auth/login "HTTP/1.1 200 OK"
+2026-06-18 12:56:17,698 - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "D:\Project\ai-ecommerce-platform\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2026-06-18 12:56:17,933 - INFO - Login attempt | Email=admin@test.com
+2026-06-18 12:56:18,128 - INFO - Login successful | User ID=7 | Email=admin@test.com
+2026-06-18 12:56:18,136 - INFO - HTTP Request: POST http://testserver/auth/login "HTTP/1.1 200 OK"
+2026-06-18 12:56:18,161 - INFO - HTTP Request: POST http://testserver/categories "HTTP/1.1 200 OK"

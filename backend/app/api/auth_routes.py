@@ -7,6 +7,9 @@ from app.db.dependencies import get_db
 from app.services.user_service import authenticate_user
 from app.core.security import create_access_token
 from app.schemas.auth import TokenResponse
+from app.schemas.user import ChangePasswordRequest
+from app.services.user_service import change_password
+from app.api.deps import get_current_user
 
 router = APIRouter(
     prefix="/auth",
@@ -40,3 +43,18 @@ def login(
         "access_token": access_token,
         "token_type": "bearer"
     }
+
+@router.put(
+    "/change-password"
+)
+def update_password(
+    password_data: ChangePasswordRequest,
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_user)
+):
+
+    return change_password(
+        db=db,
+        password_data=password_data,
+        current_user=current_user
+    )

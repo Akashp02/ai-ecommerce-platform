@@ -34,3 +34,13 @@ def get_user_by_email(
         .filter(User.email == email)
         .first()
     )
+
+def update_user_password(
+    db: Session,
+    user,
+):
+
+    db.commit()
+    db.refresh(user)
+
+    return user

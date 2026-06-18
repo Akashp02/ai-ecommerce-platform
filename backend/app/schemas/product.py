@@ -1,11 +1,12 @@
 from pydantic import BaseModel, Field
-
+from typing import Optional
 
 class ProductCreate(BaseModel):
 
     category_id: int
     sku: str
     name: str
+    description: Optional[str] = None
     price: float = Field(
         gt=0
     )
@@ -25,7 +26,7 @@ class ProductResponse(BaseModel):
     category_id: int
     sku: str
     name: str
-    description: str
+    description: Optional[str] = None
     price: float
     stock_quantity: int
     is_available: bool
